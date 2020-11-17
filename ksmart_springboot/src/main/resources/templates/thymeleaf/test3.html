@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>아이디</th>
+				<th>비밀번호</th>
+				<th>권한</th>
+				<th>이름</th>
+				<th>이메일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${member.memberId}"></td>
+				<td>[[${member.memberPw}]]</td>
+				<td>
+					<input type="text" th:value="${member.memberLevel}">
+				</td>
+				<td>
+					<label th:text="${member.memberName}"></label>
+				</td>
+				<td th:text="${member.memberEmail}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
