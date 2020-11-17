@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KsmartSpringbootApplication {
 
 	public static void main(String[] args) {
+		System.out.println("springbootspringbootspringbootspringbootspringbootspringbootspringbootspringbootspringbootspringbootspringboot");
 		SpringApplication.run(KsmartSpringbootApplication.class, args);
 	}
 
