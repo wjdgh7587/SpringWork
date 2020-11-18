@@ -7,6 +7,7 @@ public class Member {
 	private String memberEmail;
 	private String memberLevel;
 	
+	
 	public String getMemberId() {
 		return memberId;
 	}

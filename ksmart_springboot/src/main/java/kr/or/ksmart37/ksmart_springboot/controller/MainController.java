@@ -1,13 +1,36 @@
 package kr.or.ksmart37.ksmart_springboot.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ksmart37.ksmart_springboot.dto.Member;
 
 @Controller
 public class MainController {
+	@RequestMapping(value="/test4", method = RequestMethod.GET)
+	public String test4(Model model) {
+		
+		List<Member> list = new ArrayList<Member>();
+				
+		
+		
+		System.out.println(list);
+		for(int i=0; i<10; i++) {
+	        list.add(new Member("id00"+i,"pw00"+i,"홍0"+i,"홍0"+i+"@ksmart.or.kr"));
+		}
+		System.out.println(list.toString() + "<--list");
+	    model.addAttribute("list", list);
+
+		
+		return "thymeleaf/test4";
+	}
+	
 	@GetMapping("/test3")
 	public String test3(Model model) {
 		Member m = new Member();
