@@ -47,8 +47,8 @@
 			<th:block th:each="l : ${list}">
 				<tr>
 					<td th:text="${l.memberId}"></td>
-					<td th:if="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: red;"></td>
-					<td th:unless="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: blue;"></td>
+					<td th:if="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: blue;"></td>
+					<td th:unless="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: green;"></td>
 					<td th:text="${l.memberLevel}"></td>
 					<td th:text="${l.memberName}"></td>
 					<td th:text="${l.memberEmail}"></td>
