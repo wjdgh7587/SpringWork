@@ -7,7 +7,24 @@ public class Member {
 	private String memberEmail;
 	private String memberLevel;
 	
+
+
 	
+	public Member() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Member(String memberId, String memberPw, String memberLevel, String memberName, String memberEmail) {
+		
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberLevel = memberLevel;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+	}
+
+
+
 	public String getMemberId() {
 		return memberId;
 	}

@@ -16,10 +16,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				
-
-			</tr>
+			<!-- 	내가 한 test4 작업 생성자 메소드 이용	
+			<tr th:each="member : ${list}">
+				<td th:text="${member.memberId}"></td>
+				<td th:text="${member.memberPw}"></td>
+				<td th:text="${member.memberLevel}"></td>
+				<td th:text="${member.memberName}"></td>
+				<td th:text="${member.memberEmail}"></td>
+			</tr> 
+			-->
+			<tr th:each="l : ${list}">
+				<td th:text="${l.memberId}"></td>
+				<td th:text="${l.memberPw}"></td>
+				<td th:text="${l.memberLevel}"></td>
+				<td th:text="${l.memberName}"></td>
+				<td th:text="${l.memberEmail}"></td>
+			</tr>	
 		</tbody>
 	</table>
 </body>

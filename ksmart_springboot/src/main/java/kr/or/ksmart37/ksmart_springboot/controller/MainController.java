@@ -17,19 +17,42 @@ public class MainController {
 	public String test4(Model model) {
 		
 		List<Member> list = new ArrayList<Member>();
-				
+		Member member = null;
 		
-		
-		System.out.println(list);
-		for(int i=0; i<10; i++) {
-	        list.add(new Member("id00"+i,"pw00"+i,"홍0"+i,"홍0"+i+"@ksmart.or.kr"));
-		}
-		System.out.println(list.toString() + "<--list");
+		for(int i=1; i<11; i++) {
+			if(i%3 == 0) {
+				member = new Member("id00"+i, "pw00"+i, "구매자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}else if(i%3 == 1) {
+				member = new Member("id00"+i, "pw00"+i, "관리자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}else if(i%3==2) {
+				member = new Member("id00"+i, "pw00"+i, "판매자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}
+			else {
+				member = new Member("id00"+i, "pw00"+i, "사용자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}
+			list.add(member);
+		}   
+	    System.out.println(list);
 	    model.addAttribute("list", list);
-
-		
+	    
 		return "thymeleaf/test4";
 	}
+// 내가 한 작업 생성자 메소드로 바로 할당시켜서 list 통째로 넣어버림	
+//	@RequestMapping(value="/test4", method = RequestMethod.GET)
+//	public String test4(Model model) {
+//		
+//		List<Member> list = new ArrayList<Member>();
+//		System.out.println(list);
+//		for(int i=0; i<10; i++) {
+//			list.add(new Member("id00"+i, "pw00"+i, "level"+i, "홍0"+i,"email"+i+"@ksmart.or.kr"));
+//
+//		}
+//		System.out.println(list.toString());
+//	    model.addAttribute("list", list);
+//
+//		
+//		return "thymeleaf/test4";
+//	}
 	
 	@GetMapping("/test3")
 	public String test3(Model model) {
