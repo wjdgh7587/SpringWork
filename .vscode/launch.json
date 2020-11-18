@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Spring Boot-KsmartSpringbootApplication<ksmart_springboot>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "kr.or.ksmart37.ksmart_springboot.KsmartSpringbootApplication",
+			"projectName": "ksmart_springboot",
+			"args": ""
+		}
+	]
+}

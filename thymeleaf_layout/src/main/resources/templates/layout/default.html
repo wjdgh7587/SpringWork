@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body>
+	<h1>Im testing with spring and simple dashboard</h1>
+	<div id="wrapper">
+		<!-- header nav area -->
+		<div th:replace="fragments/header :: headerFragment"></div>
+		
+		<!-- middlecontainer area -->
+		<div th:replace="fragments/middlecontainer :: middleFragment"></div>
+		<div>
+			<th:block layout:fragment="customContent">
+			
+			</th:block>
+		</div>
+		<!-- footer area -->
+		<div th:replace="fragments/footer :: footerFragment"></div>
+	</div>
+</body>
+</html>
