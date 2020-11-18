@@ -1,18 +1,73 @@
 package kr.or.ksmart37.ksmart_springboot.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ksmart37.ksmart_springboot.dto.Member;
 
 @Controller
 public class MainController {
+	
+	@PostMapping("/test6")
+	public String test6(Model model, Member member, @RequestParam(value="memberId", required = false) String memberId) {
+		
+
+		System.out.println("test 6 화면에서 입력받은 값 : "+member);
+		System.out.println("test 6 화면에서 memberId 입력 받은 값 : "+memberId);
+		
+		/*
+		 * Spring 에서는 아래와 같은 방법으로 리다이렉트를 간단하게 가능하다.
+		 * redirect : address
+		 * */
+		return "redirect:/";
+		
+	}
+	
+	@GetMapping("/test6")
+	public String test6(Model model) {
+		model.addAttribute("title", "test6");
+		
+		return "thymeleaf/test6";
+	}
+	
+	@GetMapping("/test5")
+	public String test5(Model model) {
+		
+		List<Member> memberList = new ArrayList<Member>();
+		Member member = null;
+		
+		for(int i=1; i<11; i++) {
+			if(i%3 == 0) {
+				member = new Member("id00"+i, "pw00"+i, "구매자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}else if(i%3 == 1) {
+				member = new Member("id00"+i, "pw00"+i, "관리자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}else if(i%3==2) {
+				member = new Member("id00"+i, "pw00"+i, "판매자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}
+			else {
+				member = new Member("id00"+i, "pw00"+i, "사용자", "홍0"+i,"email"+i+"@ksmart.or.kr");
+			}
+			memberList.add(member);
+		}   
+	    
+	    model.addAttribute("memberList", memberList);
+		
+		model.addAttribute("now", new Date());
+		model.addAttribute("price", 1234567890);
+		model.addAttribute("title", "test5");
+		
+		return "thymeleaf/test5";
+	}
+	
 	@RequestMapping(value="/test4", method = RequestMethod.GET)
 	public String test4(Model model) {
 		
