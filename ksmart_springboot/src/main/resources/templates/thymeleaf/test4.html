@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1">
+	<table border="1" th:with="pw='pw001">
 		<thead>
 			<tr>
 				<th>아이디</th>
@@ -31,10 +31,10 @@
 				<td th:text="${l.memberId}"></td>
 				
 				<!-- Spring 조건문은 false 일경우가 true이고, true일 경우도 true로 할당 -->
-				<th:block th:if="${l.memberPw == 'pw001'}">
+				<th:block th:if="${l.memberPw == pw}">
 					<td th:text="${l.memberPw}" style="color : red;"></td>
 				</th:block>
-				<th:block th:unless="${l.memberPw == 'pw001'}">
+				<th:block th:unless="${l.memberPw == pw}">
 					<td th:text="${l.memberPw}"></td>
 				</th:block>
 				
@@ -53,6 +53,10 @@
 					<td th:text="${l.memberName}"></td>
 					<td th:text="${l.memberEmail}"></td>
 				</tr>
+			</th:block>
+			<!-- thymeleaf를 활용한 반복문(유일한 방법이다.)  -->
+			<th:block th:each="num : ${#numbers.sequence(1,5)}" >
+				<div th:text="${num}"></div>
 			</th:block>
 		</tbody>
 	</table>
