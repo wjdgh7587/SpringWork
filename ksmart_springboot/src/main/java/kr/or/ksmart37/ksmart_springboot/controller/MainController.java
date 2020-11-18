@@ -17,6 +17,14 @@ import kr.or.ksmart37.ksmart_springboot.dto.Member;
 @Controller
 public class MainController {
 	
+	@GetMapping("/test7")
+	public String test7(Model model) {
+		model.addAttribute("title","test7");
+
+		return "thymeleaf/test7";
+		
+	}
+	
 	@PostMapping("/test6")
 	public String test6(Model model, Member member, @RequestParam(value="memberId", required = false) String memberId) {
 		
@@ -156,8 +164,9 @@ public class MainController {
 	 * return -> 논리명, 파일명(html)
 	 * */
 	@GetMapping("/")
-	public String index() {
-		
+	public String index(Model model) {
+		model.addAttribute("title", "maintest");
+
 		return "main";
 	}
 	

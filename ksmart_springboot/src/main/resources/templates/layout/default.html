@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body>
+	<div id="wrapper">
+		<div th:replace="fragments/header :: headerFragment"></div>
+
+		<div th:replace="fragments/leftmenu :: leftMenuFragment"></div>
+
+		<!-- 페이지의 내용이 변경되는 페이지 -->
+		<div id="rightcolumn">
+			<!-- Start customContent -->
+			<th:block layout:fragment="customContent"></th:block>
+			<!-- End customContent -->
+		</div>
+
+		<div th:replace="fragments/footer :: footerFragment"></div>
+		<!-- 
+			## id 값이 중복이 될수 있으니, fragment에서 선언했다면,
+			replace 할때는 지워준다.
+		 -->
+	</div>
+</body>
+</html>
