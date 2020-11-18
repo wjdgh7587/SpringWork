@@ -5,6 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- 앵커 활용법 주소값 이동시는 항상 @  -->
+	<a th:href="@{http://www.naver.com}">naver.com</a>
+	<br>
+	
+	<!-- 테이블안에서 사용할 지역변수 선언 -->
 	<table border="1" th:with="pw='pw001">
 		<thead>
 			<tr>
