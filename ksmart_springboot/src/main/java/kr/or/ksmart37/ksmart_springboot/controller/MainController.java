@@ -47,10 +47,9 @@ public class MainController {
 //			list.add(new Member("id00"+i, "pw00"+i, "level"+i, "홍0"+i,"email"+i+"@ksmart.or.kr"));
 //
 //		}
-//		System.out.println(list.toString());
+//		System.out.println(list);
 //	    model.addAttribute("list", list);
 //
-//		
 //		return "thymeleaf/test4";
 //	}
 	

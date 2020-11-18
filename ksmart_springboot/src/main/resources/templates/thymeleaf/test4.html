@@ -16,6 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		
 			<!-- 	내가 한 test4 작업 생성자 메소드 이용	
 			<tr th:each="member : ${list}">
 				<td th:text="${member.memberId}"></td>
@@ -23,15 +24,36 @@
 				<td th:text="${member.memberLevel}"></td>
 				<td th:text="${member.memberName}"></td>
 				<td th:text="${member.memberEmail}"></td>
+				
 			</tr> 
 			-->
 			<tr th:each="l : ${list}">
 				<td th:text="${l.memberId}"></td>
-				<td th:text="${l.memberPw}"></td>
+				
+				<!-- Spring 조건문은 false 일경우가 true이고, true일 경우도 true로 할당 -->
+				<th:block th:if="${l.memberPw == 'pw001'}">
+					<td th:text="${l.memberPw}" style="color : red;"></td>
+				</th:block>
+				<th:block th:unless="${l.memberPw == 'pw001'}">
+					<td th:text="${l.memberPw}"></td>
+				</th:block>
+				
+			<!-- 	<td th:text="${l.memberPw}"></td> -->
 				<td th:text="${l.memberLevel}"></td>
 				<td th:text="${l.memberName}"></td>
 				<td th:text="${l.memberEmail}"></td>
-			</tr>	
+			</tr>
+		<!-- 또다른 방법 -->
+			<th:block th:each="l : ${list}">
+				<tr>
+					<td th:text="${l.memberId}"></td>
+					<td th:if="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: red;"></td>
+					<td th:unless="${l.memberPw == 'pw001'}" th:text="${l.memberPw}" style="color: blue;"></td>
+					<td th:text="${l.memberLevel}"></td>
+					<td th:text="${l.memberName}"></td>
+					<td th:text="${l.memberEmail}"></td>
+				</tr>
+			</th:block>
 		</tbody>
 	</table>
 </body>
