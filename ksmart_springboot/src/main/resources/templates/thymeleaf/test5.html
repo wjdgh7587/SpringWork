@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+
+<body>
+	<!-- 내장 객체 사용 -->
+	<h1 th:text="${'날짜' + now}"></h1>
+	<!-- dates 내장객체 -->
+	<h1 th:text="${'날짜' + #dates.format(now, 'yyyy-MM-dd HH:mm:ss')}"></h1>
+	<!-- numbers 내장객체 -->
+	<h1 th:text="${'가격' + #numbers.formatInteger(price, 3, 'COMMA')}"></h1>
+	<h1 th:text="${'리스트 객체 유무 확인' + #lists.isEmpty(memberList)}"></h1>
+	
+	<th:block th:each="num : ${#numbers.sequence(1,5)}">
+		<label th:text="${memberList.get(num).memberId}"></label>
+		
+	</th:block>
+</body>
+
+</html>
