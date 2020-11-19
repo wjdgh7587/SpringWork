@@ -21,6 +21,12 @@ public class MemberService {
 	public List<Member> getMemberList(){
 		List<Member> memberList = memberMapper.getMemberList();
 		
+		/*과제*/
+		/*
+		 * 권한 번호들을 관리자, 판매자, 사용자 등을 판별하여 memberList에 다시 세팅해서 반환하여, 화면에 사용자 권한별로 표시되게 하기
+		 * 
+		 * */
+		
 		return memberList;
 		
 	}
