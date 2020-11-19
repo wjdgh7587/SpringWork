@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default}">
+
+<!-- <meta charset="UTF-8">
+<title>Spring boot test</title>
+</head>
+<body>
+	<h1>HELLO SPRING BOOT</h1>
+</body> -->
+<th:block layout:fragment="customTitle">
+	<title th:text="title"></title>
+</th:block>
+
+<th:block layout:fragment="customContent">
+	<h1>HELLO SPRING BOOT</h1>
+</th:block>
+</html>
