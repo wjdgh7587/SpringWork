@@ -19,7 +19,6 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	public List<Member> getMemberList(){
-		Member m = null;
 		List<Member> memberList = memberMapper.getMemberList();
 		int listSize = memberList.size();
 		
@@ -30,7 +29,14 @@ public class MemberService {
 		 * */
 		
 		for(int i=0; i<listSize; i++) {
-			memberList.get(i).setMemberLevel(null);
+			if(memberList.get(i).getMemberLevel().equals("1")) {
+				memberList.get(i).setMemberLevel("관리자");
+			}else if(memberList.get(i).getMemberLevel().equals("2")) {
+				memberList.get(i).setMemberLevel("판매자");
+			}else if(memberList.get(i).getMemberLevel().equals("3")) {
+				memberList.get(i).setMemberLevel("사용자");
+			}
+			
 		}
 	
 		return memberList;
