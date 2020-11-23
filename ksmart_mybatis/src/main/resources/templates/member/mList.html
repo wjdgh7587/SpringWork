@@ -9,6 +9,9 @@
 </th:block>
 
 <th:block layout:fragment="customContent">
+<div style="width:100%; height:350px; overflow:auto">
+
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -29,6 +32,7 @@
 	</th:block>
 		 -->
 		<tbody>
+<!-- 			<tr th:if="${#lists.size(memberList)>0}"> -->
 			<tr th:each="member : ${memberList}">
 				<td th:text="${member.memberId}"></td>
 				<td th:text="${member.memberPw}"></td>
@@ -50,5 +54,6 @@
             
             -->
 	</table>
+	</div>
 </th:block>
 </html>

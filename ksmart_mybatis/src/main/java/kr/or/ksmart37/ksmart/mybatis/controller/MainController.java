@@ -11,4 +11,5 @@ public class MainController {
 		model.addAttribute("title","main 화면");
 		return "main";
 	}
+
 }

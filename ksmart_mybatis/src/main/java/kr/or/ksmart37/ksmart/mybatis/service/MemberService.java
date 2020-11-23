@@ -18,6 +18,21 @@ public class MemberService {
 	@Autowired 
 	private MemberMapper memberMapper;
 	
+	
+	//회원가입 성공 유무 판단 및 addMember 서비스 호출
+	public String addMember(Member member) {
+		String insertCheck = "회원가입 실패";
+		if(member != null) {
+			int result = memberMapper.addMember(member);
+			if(result > 0) {
+				insertCheck = "회원가입성공";
+			}
+		}
+		
+		
+		return "insertCheck";
+	}
+	
 	public List<Member> getMemberList(){
 		List<Member> memberList = memberMapper.getMemberList();
 		int listSize = memberList.size();
