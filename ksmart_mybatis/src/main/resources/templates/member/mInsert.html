@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default}">
 
 
@@ -23,40 +22,35 @@
 		<table border="1">
 			<tr>
 				<td>회원아이디</td>
-				<td><input type="text" name="memberId"
-					placeholder="아이디를 입력해주세요"></td>
+				<td><input class="m_id" type="text" name="memberId" placeholder="아이디를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td>회원비밀번호</td>
-				<td><input type="text" name="memberPw"
-					placeholder="비밀번호를 입력해주세요"></td>
+				<td><input class="m_pw" type="text" name="memberPw" placeholder="비밀번호를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td>회원이름</td>
-				<td><input type="text" name="memberName"
-					placeholder="이름을 입력해주세요"></td>
+				<td><input class="m_name" type="text" name="memberName" placeholder="이름을 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td>회원권한</td>
-				<td><select name="memberLevel">
+				<td><select calss="m_level" name="memberLevel">
 						<option value="1">관리자</option>
 						<option value="2">판매자</option>
 						<option value="3">구매자</option>
-				</select></td>
+					</select></td>
 			</tr>
 			<tr>
 				<td>회원이메일</td>
-				<td><input type="text" name="memberEmail"
-					placeholder="이메일을 입력해주세요"></td>
+				<td><input type="text" name="memberEmail" placeholder="이메일을 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><input type="text" name="memberAddr"
-					placeholder="주소를 입력해주세요"></td>
+				<td><input type="text" name="memberAddr" placeholder="주소를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">
-					<button type="submit">회원가입</button>
+					<button id="btntest" type="submit">회원가입</button>
 
 				</td>
 			</tr>
@@ -65,8 +59,35 @@
 
 
 	</form>
-
-
-
 </th:block>
+
 </html>
+<script>
+	//유효성 검사 테스트	
+
+	var id_form = document.querySelector(".m_id").parentNode.parentElement;
+	var pw_form = document.querySelector(".m_pw").parentNode.parentElement;
+	var name_form = document.querySelector(".m_name").parentNode.parentElement;
+
+	console.log(id_form);
+	console.log(pw_form);
+	console.log(name_form);
+
+	function checkingEmpty() {
+		if (id_form.childNode) {
+			alert('error');
+		}
+	}
+
+	function init() {
+		var btnTest = document.querySelector("#btntest").addEventListener("click", function checkingEmpty() {
+			console.log(id);
+		});
+	}
+
+
+
+
+	init();
+
+</script>

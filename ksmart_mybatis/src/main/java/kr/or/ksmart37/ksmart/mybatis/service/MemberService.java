@@ -15,9 +15,28 @@ public class MemberService {
 	
 	//	DI
 	//의존성 주입(new 와 동일하다.)
-	@Autowired 
+	
+
+	 //생성자를 통한 autowired 예제
+	/*
+	  private MemberMapper memberMapper;
+	 	
+	  @Autowired 
+	  public MemberService(MemberMapper memberMapper) {
+		  this.memberMapper = memberMapper;
+	  }
+	*/
+	//필드를 통한 autowired 예제
+	@Autowired
 	private MemberMapper memberMapper;
 	
+	//Udpate
+	
+	public Member getMemberById(String memberId) {
+		Member member = memberMapper.getMemberById(memberId);
+		
+		return member;
+	}
 	
 	//회원가입 성공 유무 판단 및 addMember 서비스 호출
 	public String addMember(Member member) {
@@ -28,8 +47,7 @@ public class MemberService {
 				insertCheck = "회원가입성공";
 			}
 		}
-		
-		
+	
 		return "insertCheck";
 	}
 	
@@ -57,5 +75,6 @@ public class MemberService {
 		return memberList;
 		
 	}
+	
 		
 }

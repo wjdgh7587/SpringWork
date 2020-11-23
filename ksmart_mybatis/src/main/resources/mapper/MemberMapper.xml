@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="kr.or.ksmart37.ksmart.mybatis.mapper.MemberMapper">
   <!-- 회원리스트  -->
+  
+ 
+  
   <select id="getMemberList" resultType="Member">
    	SELECT
 		  m_id			AS memberId
@@ -35,4 +38,20 @@
 		#{memberAddr}, 
 		NOW());
   </insert>
+  
+  <!-- 업데이트  -->
+  <select id="getMemberById" parameterType="String" resultType="Member">
+  		SELECT
+		  m_id			AS memberId
+		, m_pw			AS memberPw
+		, m_name			AS memberName
+		, m_level		AS memberLevel
+		, m_email		AS memberEmail
+		, m_addr			AS memberAddr
+		, m_reg_date	AS memberRegDate
+	FROM
+		tb_member
+	WHERE 
+		m_id=#{memberId};	
+  </select>
 </mapper>

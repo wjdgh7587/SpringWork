@@ -41,7 +41,10 @@
 				<td th:text="${member.memberEmail}"></td>
 				<td th:text="${member.memberAddr}"></td>
 				<td th:text="${member.memberRegDate}"></td>
-				<td>수정</td>
+				<td>
+					<a th:href="@{/modifyMember(memberId=${member.memberId})}">수정</a>
+					<!-- <a th:href="@{/modifyMember(memberId=${memberId})}"></a> -->
+				</td>
 				<td>삭제</td>
 			</tr>
 		</tbody>
@@ -56,4 +59,5 @@
 	</table>
 	</div>
 </th:block>
+
 </html>
