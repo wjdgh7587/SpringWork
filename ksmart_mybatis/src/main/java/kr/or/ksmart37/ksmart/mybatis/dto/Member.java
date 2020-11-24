@@ -1,5 +1,7 @@
 package kr.or.ksmart37.ksmart.mybatis.dto;
 
+import java.util.List;
+
 public class Member {
 	private String memberId;
 	private String memberPw;
@@ -8,6 +10,13 @@ public class Member {
 	private String memberEmail;
 	private String memberAddr;
 	private String memberRegDate;
+	private List<Goods> goodsList;
+	public List<Goods> getGoodsList() {
+		return goodsList;
+	}
+	public void setGoodsList(List<Goods> goodsList) {
+		this.goodsList = goodsList;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -67,6 +76,8 @@ public class Member {
 		builder.append(memberAddr);
 		builder.append(", memberRegDate=");
 		builder.append(memberRegDate);
+		builder.append(", goodsList=");
+		builder.append(goodsList);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -30,6 +30,10 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	public List<Member> getSellerList(){
+		List<Member> sellerlist = memberMapper.getSellerList();
+		return sellerlist;
+	}
 	
 	//removeDelete 처리하기
 	public String removeMember(String memberId, String memberPw, String memberLevel) {

@@ -32,6 +32,18 @@ public class MemberController {
 		System.out.println("###########################################################");
 	}
 	
+	@GetMapping("/sellerList")
+	public String sellerList(Model model) {
+		List<Member> sellerList = memberService.getSellerList();
+		System.out.println(" =============== 판매자별 상품현황==============");
+		System.out.println(sellerList);
+		System.out.println(" ==========================================");
+		model.addAttribute("title", "판매자상품현황");
+		model.addAttribute("sellerList", sellerList);
+		return "redirect:memberList";
+		//return "member/sellerList";
+	}
+	
 	@GetMapping("/removeMember")
 	public String removeMember(Model model
 			, @RequestParam(name = "memberId", required = false)String memberId			

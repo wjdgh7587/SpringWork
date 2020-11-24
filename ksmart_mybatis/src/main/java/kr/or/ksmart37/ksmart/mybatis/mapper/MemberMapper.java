@@ -7,6 +7,8 @@ import kr.or.ksmart37.ksmart.mybatis.dto.Member;
 
 @Mapper
 public interface MemberMapper {
+	List<Member> getSellerList();
+	
 	//remove 처리 한거
 	int removeLoginById(String memberId);
 	int removeOrderById(String memberId);
