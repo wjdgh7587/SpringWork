@@ -54,4 +54,86 @@
 	WHERE 
 		m_id=#{memberId};	
   </select>
+    <!--  업데이트쿼리 -->
+  <update id ="modifyMember" parameterType="Member">
+  		UPDATE tb_member
+	set
+		m_pw= #{memberPw},
+		m_name = #{memberName},
+		m_level = #{memberLevel},
+		m_email = #{memberEmail},
+		m_addr = #{memberAddr},
+		m_reg_date = now()
+	WHERE 
+		m_id = #{memberId};
+  </update>
+  
+  <!-- 삭제처리 1 내가한거-->
+  <delete id="deleteMember" parameterType="String">
+  	DELETE 
+  	FROM 
+  		tb_member
+  	WHERE 
+  		m_id=#{memberId};
+  </delete>
+  
+  <!-- 삭제처리 2 removeDelete -->
+  <delete id="removeMember" parameterType="Member" >
+  	DELETE 
+  	FROM
+  		tb_login
+  	WHERE
+  		login_id = #{memberId}
+  		
+  	DELETE   	
+  	FROM
+  		tb_order
+  	WHERE
+  		o_id = #{memberId}
+  	
+  	DELETE   	
+  	FROM
+  		tb_goods
+  	WHERE
+  		g_seller_id = #{memberId}
+  		
+  	DELETE   	
+  	FROM 
+  		tb_member  	
+  	WHERE 
+  		m_id=#{memberId};
+  </delete>
+  <!-- 삭제처리 removeDelete -->
+   <delete id="removeLoginById" parameterType="String">
+  	DELETE 
+  	FROM
+  		tb_login
+  	WHERE
+  		login_id = #{memberId};	
+  </delete>
+   <delete id="removeOrderById" parameterType="String">
+  	DELETE 
+  	FROM
+  		tb_order
+  	WHERE
+  		o_id = #{memberId};	
+  </delete>
+   
+   <delete id="removeGoodsById" parameterType="String">
+  	DELETE 
+  	FROM
+  		tb_goods
+  	WHERE
+  		g_seller_id = #{memberId};	
+  </delete>
+     <delete id="removeMemberById" parameterType="String">
+  	DELETE 
+  	FROM
+  		tb_member
+  	WHERE
+  		m_id = #{memberId};	
+  </delete>
+  
+
+  
 </mapper>

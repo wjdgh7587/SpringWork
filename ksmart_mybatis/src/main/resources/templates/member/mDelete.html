@@ -13,7 +13,7 @@
 	<!-- Get방식은 uri에 모두 담겨있기 때문에 이를 숨기기 위해 Post 방식 사용
 		Post 방식은 form 태그에서 사용가능
 	 -->
-	<form th:action="@{/addMember}" method="post">
+	<form th:action="@{/removeMember}" method="post">
 		<!-- 
 		Get방식과 Post 방식은 주소 요청이 다르기 때문에 둘이 요청이 가능하다.
 		
@@ -22,39 +22,19 @@
 		<table border="1">
 			<tr>
 				<td>회원아이디</td>
-				<td><input class="m_id" type="text" name="memberId" placeholder="아이디를 입력해주세요"></td>
+				<td><input class="m_id" type="text" name="memberId" th:value="${memberId}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>회원비밀번호</td>
-				<td><input class="m_pw" type="text" name="memberPw" placeholder="비밀번호를 입력해주세요"></td>
-			</tr>
-			<tr>
-				<td>회원이름</td>
-				<td><input class="m_name" type="text" name="memberName" placeholder="이름을 입력해주세요"></td>
-			</tr>
-			<tr>
-				<td>회원권한</td>
-				<td><select calss="m_level" name="memberLevel">
-						<option value="1">관리자</option>
-						<option value="2">판매자</option>
-						<option value="3">구매자</option>
-					</select></td>
-			</tr>
-			<tr>
-				<td>회원이메일</td>
-				<td><input type="text" name="memberEmail" placeholder="이메일을 입력해주세요"></td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td><input type="text" name="memberAddr" placeholder="주소를 입력해주세요"></td>
+				<td>
+					<input type="hidden" name="memberLevel" th:value="${memberLevel}">
+					<input class="m_pw" type="text" name="memberPw" placeholder="비밀번호를 입력해주세요"></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">
-					<button id="btntest" type="submit">회원가입</button>
-
+					<button id="btntest" type="submit">회원탈퇴</button>
 				</td>
-			</tr>
-
+			</tr>	
 		</table>
 
 

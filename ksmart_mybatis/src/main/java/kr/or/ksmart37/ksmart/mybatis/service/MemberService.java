@@ -30,12 +30,66 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	//Udpate
+	
+	//removeDelete 처리하기
+	public String removeMember(String memberId, String memberPw, String memberLevel) {
+		String result = "회원탈퇴 실패";
+		//id member 테이블 조회하고 조회한 결과 값 중 비밀번호와 화면에서 입력받은 
+		//비밀번호가 일치하면 삭제 처리
+		
+		Member member = memberMapper.getMemberById(memberId);
+		
+		if(member != null && member.getMemberPw() != null && memberPw.equals(member.getMemberPw())) {
+			
+			int removeCheck = memberMapper.removeLoginById(memberId);
+			
+			if("판매자".equals(memberLevel)) removeCheck += memberMapper.removeGoodsById(memberId);
+			
+			if("구매자".equals(memberLevel)) removeCheck += memberMapper.removeOrderById(memberId);
+			
+			removeCheck += memberMapper.removeMemberById(memberId);
+			
+			if(removeCheck > 0 ) result = "회원삭제 성공";
+
+		}
+		
+		return result;
+	}
+	
+	//Delete 처리하기(Myself first)	
+	public String deleteMember(String memberId) {
+		
+		String deleteCheck = "회원정보 삭제 실패";
+		if(memberId != null) {
+			int result = memberMapper.deleteMember(memberId);
+			if(result > 0) {
+				deleteCheck = "회원정보 삭제 성공";
+			}
+		}
+	
+		
+		return deleteCheck;
+	}
+	
+	
+	//Udpate 리스트 받아오기
 	
 	public Member getMemberById(String memberId) {
 		Member member = memberMapper.getMemberById(memberId);
 		
 		return member;
+	}
+	//Update 처리
+	public String modifyMember(Member member) {
+		String modifyCheck = "회원정보 수정 실패";
+		if(member != null) {
+			int result = memberMapper.modifyMember(member);
+			if(result > 0) {
+				modifyCheck = "회원가입성공";
+			}
+		}
+		
+		return modifyCheck;
 	}
 	
 	//회원가입 성공 유무 판단 및 addMember 서비스 호출
@@ -75,6 +129,7 @@ public class MemberService {
 		return memberList;
 		
 	}
-	
+
+
 		
 }
