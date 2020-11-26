@@ -3,11 +3,14 @@ package kr.or.ksmart37.ksmart.mybatis.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ksmart37.ksmart.mybatis.dto.Goods;
 import kr.or.ksmart37.ksmart.mybatis.dto.Member;
 
 @Mapper
 public interface MemberMapper {
 	List<Member> getSellerList();
+	List<Goods> goodsList();
 	
 	//remove 처리 한거
 	int removeLoginById(String memberId);
@@ -28,7 +31,7 @@ public interface MemberMapper {
 	
 	
 	//MemberList (select query 문으로 조회) (다중행)
-	public List<Member> getMemberList();
+	public List<Member> getMemberList();	
 	
 	
 	//MemberInsert 회원가입 (Insert)

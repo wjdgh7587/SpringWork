@@ -40,8 +40,8 @@ public class MemberController {
 		System.out.println(" ==========================================");
 		model.addAttribute("title", "판매자상품현황");
 		model.addAttribute("sellerList", sellerList);
-		return "redirect:memberList";
-		//return "member/sellerList";
+		//return "redirect:memberList";
+		return "member/sellerList";
 	}
 	
 	@GetMapping("/removeMember")

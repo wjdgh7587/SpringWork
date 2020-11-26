@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.ksmart37.ksmart.mybatis.dto.Goods;
 import kr.or.ksmart37.ksmart.mybatis.dto.Member;
 import kr.or.ksmart37.ksmart.mybatis.mapper.MemberMapper;
 
@@ -29,6 +30,7 @@ public class MemberService {
 	//필드를 통한 autowired 예제
 	@Autowired
 	private MemberMapper memberMapper;
+
 	
 	public List<Member> getSellerList(){
 		List<Member> sellerlist = memberMapper.getSellerList();
