@@ -9,8 +9,16 @@ public class Goods {
 	private String goodsSellerId;
 	private String goodsRegDate;
 	private List<Goods> goodsList;
+	private Member member;
+	
 	public List<Goods> getGoodsList() {
 		return goodsList;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public void setGoodsList(List<Goods> goodsList) {
 		this.goodsList = goodsList;
@@ -60,6 +68,8 @@ public class Goods {
 		builder.append(goodsRegDate);
 		builder.append(", goodsList=");
 		builder.append(goodsList);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}

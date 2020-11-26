@@ -24,6 +24,7 @@
 			</thead>
 
 			<tbody>
+			<!-- 타임리프 반복문 중첩하기 -->
 				<th:block th:if="${#lists.size(sellerList) > 0}" th:each="seller : ${sellerList}">
 					<tr th:if="${#lists.size(seller.goodsList) > 0}" th:each="goods : ${seller.goodsList}">
 						<td th:text="${seller.memberId}"></td>
@@ -34,15 +35,15 @@
 <!-- 						<td th:text="${seller.goodsCode}"></td>
 						<td th:text="${seller.goodsList[0].goodsName}"></td>
 						<td th:text="${seller.goodsList[0].goodsPrice}"></td> -->
-
+					
 						<td>
 							<!-- <a th:href="@{/modifyMember(memberId=${seller.memberId})}">수정</a>			 -->
-							<a href="#">수정</a>
+							<a th:href="@{/sellerModifyGoods(goodsCode=${goods.goodsCode})}">수정</a>
 						</td>
 						<td>
 							<!-- <a th:href="@{/deleteMember(memberId=${seller.memberId})}">삭제(my)</a>					
 						<a th:href="@{/removeMember(memberId=${seller.memberId}, memberLevel=${seller.memberLevel})}">삭제(teacher)</a> -->
-							<a href="#">삭제</a>
+							<a th:href="@{/sellerRemoveGoods(goodsCode=${goods.goodsCode})}">삭제</a>
 						</td>
 					</tr>
 				</th:block>
