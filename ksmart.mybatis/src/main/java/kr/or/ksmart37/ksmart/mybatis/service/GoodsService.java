@@ -20,6 +20,18 @@ public class GoodsService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	public String addGoods(Goods goods) {
+		String insertCheck = "상품등록 실패";
+		if(goods != null) {
+			int result = goodsMapper.addGoods(goods);
+			if(result > 0) {
+				insertCheck = "상품등록 성공";
+			}
+		}
+	
+		return "insertCheck";	
+	}
+	
 	
 	//판매자 정보 리스트로 받아서 반환
 	public List<Goods> getGoodsList(){

@@ -1,20 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- Begin header -->
+	<!-- Begin header -->
 	<div id="header" th:fragment="headerFragment">
 		header.html<br>
-		상단메뉴<br><br>
-		<a th:href="@{/addMember}">01회원가입</a>
-		<a th:href="@{/memberList}">02회원전체검색</a>
-		<a href="#">03상품등록</a>
-		<a th:href="@{/goodsList}">04상품등록전체검색</a>
-		<a th:href="@{/sellerList}">05판매자별상품현황</a>
-		<a th:href="@{/login}">06로그인</a>
-		<a th:href="@{/logout}">07로그아웃</a>
+		상단메뉴 <br><br>
+		<a th:href="@{/addMember}" th:if="${session.SID == null || session.SLEVEL eq '1'}">01회원가입</a>
+		<a th:href="@{/memberList}" th:if="${session.SLEVEL eq '1'}">02회원전체검색</a>
+		<a href="/addGoods" th:if="${session.SLEVEL eq '1' || session.SLEVEL eq '2'}">03상품등록</a>
+		<a href="/goodsList" th:if="${session.SLEVEL eq '1' || session.SLEVEL eq '2'}">04상품전체검색</a>
+		<a th:href="@{/sellerList}" th:if="${session.SLEVEL eq '1'}">05판매자별상품현황</a>
+		<a th:href="@{/login}" th:if="${session.SID == null}">06로그인</a>
+		<a th:href="@{/logout}" th:unless="${session.SID == null}">07로그아웃</a>
 		<br><br>
 		<div style="text-align: right;">		
-			<label th:unless="${session.SID == null}" th:text="${'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
+			<label th:unless="${session.SID == null}" th:text="${session.SLEVELNAME+'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
 		</div>
+				
 	</div>
-<!-- End header -->
+	<!-- End header -->
+
+<!-- 백업 -->
+	<!-- <div th:if="${session.SLEVEL == null}" id="header" th:fragment="headerFragment">
+			header.html<br>
+			상단메뉴<br><br>
+			<a th:href="@{/addMember}">01회원가입</a>			
+			<a th:href="@{/login}">02로그인</a>		
+		</div> -->
+		<!-- 관리자 -->
+	<!-- 	<div th:if="${session.SLEVEL == '1'}" id="header" th:fragment="headerFragment">
+			header.html<br>
+			상단메뉴<br><br>
+			<a th:href="@{/addMember}">01회원가입</a>
+			<a th:href="@{/memberList}">02회원전체검색</a>
+			<a href="/addGoods">03상품등록</a>
+			<a th:href="@{/goodsList}">04상품등록전체검색</a>
+			<a th:href="@{/sellerList}">05판매자별상품현황</a>
+			<a th:href="@{/logout}">06로그아웃</a>
+			<br><br>
+			<div style="text-align: right;">		
+				<label th:unless="${session.SID == null}" th:text="${session.SLEVEL + 'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
+			</div>
+		</div> -->
+		<!-- 판매자  -->
+	<!-- 	<div th:if="${session.SLEVEL == '2'}" id="header" th:fragment="headerFragment">
+			header.html<br>
+			상단메뉴<br><br>			
+			<a href="#">01상품등록</a>
+			<a th:href="@{/goodsList}">02상품등록전체검색</a>
+			<a th:href="@{/logout}">03로그아웃</a>
+			<br><br>
+			<div style="text-align: right;">		
+				<label th:unless="${session.SID == null}" th:text="${session.SLEVEL + 'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
+			</div>
+		</div> -->
+		<!-- 구매자  -->
+<!-- 		<div th:if="${session.SLEVEL == '3'}" id="header" th:fragment="headerFragment">
+			header.html<br>
+			상단메뉴<br><br>
+			<a th:href="@{/logout}">01로그아웃</a>
+			<br><br>
+			<div style="text-align: right;">		
+				<label th:unless="${session.SID == null}" th:text="${session.SLEVEL + 'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
+			</div>
+		</div> -->
+
+	
+
 </html>

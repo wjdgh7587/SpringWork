@@ -59,10 +59,26 @@ public class MemberController {
 		
 		//아이디 처리
 		if(memberId != null && memberPw != null && member != null &&member.getMemberPw() != null && memberPw.equals(member.getMemberPw())) {
+			String level = member.getMemberLevel();
+			String levelName = "";
+			
+			if(level.equals("1")) {
+				levelName = "관리자";
+			}else if(level.equals("2")) {
+				levelName = "판매자";
+			}else if(level.equals("3")) {
+				levelName = "구매자";
+			}else {
+				levelName = "회원";
+			}
+			
 			session.setAttribute("SID", memberId);
 			session.setAttribute("SLEVEL", member.getMemberLevel());
+			session.setAttribute("SLEVELNAME", levelName);
 			session.setAttribute("SNAME", member.getMemberName());
 			System.out.println(memberId+" >>> 로그인 성공");
+			System.out.println(member.getMemberLevel()+" >>> 권한 체크");
+			System.out.println(levelName+" >>> 권한 체크2");
 		}else {
 			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
 			System.out.println(memberId+"로그인 실패");

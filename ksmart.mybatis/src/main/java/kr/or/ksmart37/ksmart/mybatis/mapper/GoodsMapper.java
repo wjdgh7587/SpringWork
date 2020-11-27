@@ -18,5 +18,6 @@ public interface GoodsMapper {
 	
 	public int removeGoods(String goodsCode);
 
+	public int addGoods(Goods goods);
 	
 }

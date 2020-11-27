@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default}">
+
+
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<th:block layout:fragment="customContent">
+
+	<h1>상품 등록 페이지</h1>
+	<!-- Get방식은 uri에 모두 담겨있기 때문에 이를 숨기기 위해 Post 방식 사용
+		Post 방식은 form 태그에서 사용가능
+	 -->
+	<form th:action="@{/addGoods}" method="post">
+		<!-- 
+		Get방식과 Post 방식은 주소 요청이 다르기 때문에 둘이 요청이 가능하다.
+		
+		처음 memberController에서 get방식맵핑을 하였음
+	 -->
+		<table border="1">
+			<tr>
+				<td>상품등록 아이디</td>
+				<!-- ${#strings.isEmpty(session.SID)} -->
+				<td><input class="g_code" type="text" name="goodsSellerId" th:unless="${session.SID == null}" th:value="${session.SID}" readonly="readonly"></td>
+				<td><input class="g_code" type="hidden" name="memberLevel" th:unless="${session.SLEVEL == null}" th:value="${session.SLEVEL}"></td>
+			</tr>
+			<tr>
+				<td>상품이름</td>
+				<td><input class="g_name" type="text" name="goodsName" placeholder="상품이름을 입력해주세요"></td>
+			</tr>
+			<tr>
+				<td>상품가격</td>
+				<td><input class="g_price" type="text" name="goodsPrice" placeholder="상품가격을 입력해주세요"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button id="btntest" type="submit">상품등록</button>
+
+				</td>
+			</tr>
+
+		</table>
+
+
+	</form>
+</th:block>
+
+<script>
+	
+
+	
+</script>
+</html>
