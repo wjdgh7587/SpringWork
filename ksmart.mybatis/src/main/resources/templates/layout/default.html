@@ -11,7 +11,7 @@
 		<div th:replace="fragments/leftmenu :: leftMenuFragment"></div>
 
 		<!-- 페이지의 내용이 변경되는 페이지 -->
-		<div id="rightcolumn">
+		<div id="rightcolumn" style="overflow: scroll;">
 			<!-- Start customContent -->
 			<th:block layout:fragment="customContent"></th:block>
 			<!-- End customContent -->
