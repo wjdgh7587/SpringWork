@@ -45,14 +45,13 @@ public class MemberController {
 		return "login/login";
 	}
 	@PostMapping("/login")
-	public String login(@RequestParam(name = "memberId", required = false)String memberId,
-						@RequestParam(name = "memberPw", required = false)String memberPw,
+	public String login(@RequestParam(name = "memberId", required = false) String memberId,
+						@RequestParam(name = "memberPw", required = false) String memberPw,
 						HttpSession session,
 						RedirectAttributes rAttr) {
 		
 		//HttpServlet request으로 기존의 로그인을 처리하였다.
 		//로그인 처리를 위한 세션 작업
-
 		System.out.println("로그인 화면에서 입력 받은 아이디 : "+ memberId);
 		System.out.println("로그인 화면에서 입력 받은 비밀번호 : "+ memberPw);
 		
@@ -63,7 +62,7 @@ public class MemberController {
 			session.setAttribute("SID", memberId);
 			session.setAttribute("SLEVEL", member.getMemberLevel());
 			session.setAttribute("SNAME", member.getMemberName());
-			System.out.println(memberId+"로그인 성공");
+			System.out.println(memberId+" >>> 로그인 성공");
 		}else {
 			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
 			System.out.println(memberId+"로그인 실패");

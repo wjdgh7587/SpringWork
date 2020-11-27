@@ -4,12 +4,12 @@
 
 
 <th:block layout:fragment="customTitle">
-	<title th:text="title"></title>
+	<title th:text="${title}"></title>
 </th:block>
 
 <th:block layout:fragment="customContent">
 
-	<h1>멤버조인 테스트</h1>
+	<h1>로그인 테스트</h1>
 	<!-- Get방식은 uri에 모두 담겨있기 때문에 이를 숨기기 위해 Post 방식 사용
 		Post 방식은 form 태그에서 사용가능
 	 -->
@@ -31,13 +31,13 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">
-					<button id="btntest" type="submit">로그인</button>
+					<button type="submit">로그인</button>
 				</td>
 			</tr>	
 		</table>
-
-
 	</form>
+	
+	<label th:unless="${#strings.isEmpty(result)}" th:text="${result}"></label>
 </th:block>
 
 </html>
@@ -47,7 +47,6 @@
 	var id = document.querySelector(".m_id");
 
 	var id_form = id.parentNode.parentElement;
-	
 
 	console.log(id_form);
 	console.log(pw_form);

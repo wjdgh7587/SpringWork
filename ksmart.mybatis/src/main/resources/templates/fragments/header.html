@@ -11,6 +11,10 @@
 		<a th:href="@{/sellerList}">05판매자별상품현황</a>
 		<a th:href="@{/login}">06로그인</a>
 		<a th:href="@{/logout}">07로그아웃</a>
+		<br><br>
+		<div style="text-align: right;">		
+			<label th:unless="${session.SID == null}" th:text="${'id: ' + session.SID + ' ' + session.SNAME + '님이  로그인하셨습니다.'}"></label>
+		</div>
 	</div>
 <!-- End header -->
 </html>
