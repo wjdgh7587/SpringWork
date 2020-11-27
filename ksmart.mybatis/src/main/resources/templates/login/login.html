@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default}">
+
+
+<th:block layout:fragment="customTitle">
+	<title th:text="title"></title>
+</th:block>
+
+<th:block layout:fragment="customContent">
+
+	<h1>멤버조인 테스트</h1>
+	<!-- Get방식은 uri에 모두 담겨있기 때문에 이를 숨기기 위해 Post 방식 사용
+		Post 방식은 form 태그에서 사용가능
+	 -->
+	<form th:action="@{/login}" method="post">
+		<!-- 
+		Get방식과 Post 방식은 주소 요청이 다르기 때문에 둘이 요청이 가능하다.
+		
+		처음 memberController에서 get방식맵핑을 하였음
+	 -->
+		<table border="1">
+			<tr>
+				<td>회원아이디</td>
+				<td><input class="m_id" type="text" name="memberId" placeholder="아이디를 입력해주세요"></td>
+			</tr>
+			<tr>
+				<td>회원비밀번호</td>
+				<td>					
+					<input class="m_pw" type="text" name="memberPw" placeholder="비밀번호를 입력해주세요"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button id="btntest" type="submit">로그인</button>
+				</td>
+			</tr>	
+		</table>
+
+
+	</form>
+</th:block>
+
+</html>
+<script>
+	//유효성 검사 테스트	
+
+	var id = document.querySelector(".m_id");
+
+	var id_form = id.parentNode.parentElement;
+	
+
+	console.log(id_form);
+	console.log(pw_form);
+	console.log(name_form);
+
+	function checkingEmpty() {
+		if (id_form.childNode) {
+			alert('error');
+		}
+	}
+
+	function init() {
+		var btnTest = document.querySelector("#btntest").addEventListener("click", function checkingEmpty() {
+			console.log(id);
+		});
+	}
+
+	init();
+
+</script>

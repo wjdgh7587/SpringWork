@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default}">
+
+
+<th:block layout:fragment="customTitle">
+	<title th:text="title"></title>
+</th:block>
+
+<th:block layout:fragment="customContent">
+	<div style="width: 100%; height: 350px; overflow: auto">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>상품코드</th>
+					<th>상품이름</th>
+					<th>상품가격</th>
+					<th>판매자 아이디</th>
+					<th>판매자 이름</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+
+			<tbody>			
+		
+				<!-- <th:block th:if="${#lists.size(goodsList) > 0}" th:each="goods : ${goodsList}"> -->
+					<tr  th:if="${#lists.size(goodsList) > 0}" th:each="goods : ${goodsList}">
+<!-- 					<tr th:if="${#lists.size(goods.Member) > 0}" th:each="member : ${goods.Member}"> -->
+						<td th:text="${goods.goodsCode}"></td>
+						<td th:text="${goods.goodsName}"></td>
+						<td th:text="${#numbers.formatInteger(goods.goodsPrice, 3, 'COMMA')}"></td>
+						<td th:text="${goods.goodsSellerId}"></td>
+						<td th:text="${goods.member.memberName}"></td>					
+						<td>										
+							<a th:href="@{/modifyGoods(goodsCode=${goods.goodsCode})}">수정</a>
+						</td>
+						<td>							
+							<a th:href="@{/removeGoods(goodsCode=${goods.goodsCode})}">삭제</a>
+						</td>
+					</tr>
+			<!-- 	</th:block>
+ -->
+
+			</tbody>
+			<!--
+	**thymeleaf에서 객체 반복문으로 풀어서 처리**
+	**jstl반복문** 	 
+	<c:forEach items="${memberList}" var="member">
+       <td>${member.memberId}</td>
+    </c:forEach> 
+            
+            -->
+		</table>
+	</div>
+</th:block>
+
+</html>
