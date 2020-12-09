@@ -9,9 +9,18 @@
 </th:block>
 
 <th:block layout:fragment="customContent">
-	<div style="width: 100%; height: 350px; overflow: auto">
-
-		<table border="1">
+	<form action="/memberList" method="post">
+	<select name = "sk">
+		<option value="아이디">아이디</option>
+		<option value="권한">권한</option>
+		<option value="이메일">이메일</option>
+	</select>
+		<input type="text" name="sv" placeholder="검색어를 입력해주세요"/>
+		<button type="submit">검색</button>
+	</form>
+	<div >
+<!-- style="width: 100%; height: 350px; overflow: auto" -->
+		<!-- <table border="1">
 			<tr>
 				<td>
 					<form th:action="@{/memberSearch}" method="post">
@@ -26,7 +35,7 @@
 					</form>
 				</td>
 			</tr>
-		</table>
+		</table> -->
 
 		<table border="1">
 			<thead>

@@ -9,6 +9,7 @@ import kr.or.ksmart37.ksmart.mybatis.dto.Member;
 
 @Mapper
 public interface MemberMapper {
+	public List<Member> getSearchMemberList(String searchKey, String searchValue);
 	List<Member> getSellerList();
 	List<Goods> goodsList();
 	

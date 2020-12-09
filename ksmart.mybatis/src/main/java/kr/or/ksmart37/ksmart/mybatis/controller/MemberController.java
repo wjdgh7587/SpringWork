@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,56 @@ public class MemberController {
 	// Goods Service
 	@Autowired
 	private GoodsService goodsSerive;
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
+
+	
+	@PostMapping("/memberList")
+	public String memberList(@RequestParam(name = "sk", required = false )String searchKey,
+							 @RequestParam(name = "sv", required = false )String searchValue,
+							 Model model) {
+	
+		log.info("화면에서 전달받은 파라미터 값 sk ::: {} ", searchKey);
+		log.info("화면에서 전달받은 파리머터 값 sv ::: {} ", searchValue);
+		
+		
+		//값들을 변환시켜 db에 원활하게 작업시키기 위해
+		if(searchKey != null && "아이디".equals(searchKey)) {
+			searchKey = "m_id";
+		}else if(searchKey != null && "권한".equals(searchKey)) {
+			searchKey = "m_level";
+			if(searchValue != null && searchValue.equals("관리자")) {
+				searchValue = "1";
+			}else if(searchValue != null && searchValue.equals("판매자")) {
+				searchValue = "2";
+			}else if(searchValue != null && searchValue.equals("구매자")){
+				searchValue = "3";
+			}else {
+				searchValue = "";
+			}
+		}else {
+			searchKey = "m_email";
+		}
+		
+		
+
+		log.info("searchkey 변환 값 sk ::: {}", searchKey);
+		//searchkey = m_id
+		//searchvalue = m_
+		
+		
+		Member member = new Member();
+		List<Member> memberSearchList = memberService.getSearchMemberList(searchKey,searchValue);
+	
+
+
+		
+		model.addAttribute("memberList", memberSearchList);
+		
+		//return "redirect:/";
+		return "member/mList";
+	}
 	
 	//로그인 & 로그아웃 맵핑////////////////////////////////////////////////////////////
 	

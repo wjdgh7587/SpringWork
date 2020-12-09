@@ -2,195 +2,204 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="kr.or.ksmart37.ksmart.mybatis.mapper.MemberMapper">
-  
-  <resultMap type="Member" id="resultMapMember">
-  	<result column="m_id" property="memberId"/><!--db쪽 column,  dto : property(dto멤버변수), Member : dto type-->
-  	<result column="m_pw" property="memberPw"/>
-  	<result column="m_level" property="memberLevel"/>
-  	<result column="m_name" property="memberName"/>
-  	<result column="m_email" property="memberEmail"/>
-  	<result column="m_addr" property="memberAddr"/>
-  	<result column="m_reg_date" property="memberRegDate"/>
-  	<!-- collection list에 하나하나씩 담아준다. 
-  		property는 List 이름
-  		javaType은 실제 동작 
-  		ofType = list에 담겨있는 것
-  		public List<Goods> getGoodsList() {
-		
-	}
-  	 -->
-  	<collection property="goodsList" javaType="java.util.ArrayList" ofType="Goods">
-  		<id column="g_code" property="goodsCode"/>
-  		<result column="g_seller_id" property="goodsSellerId"/>
-  		<result column="g_name" property="goodsName"></result>
-  		<result column="g_price" property="goodsPrice"></result>
-  		<result column="g_reg_date" property="goodsRegDate"></result>
-  	</collection>
-  	
-  </resultMap>
-  <select id="getSellerList" resultMap="resultMapMember">
-  	SELECT
+<mapper
+	namespace="kr.or.ksmart37.ksmart.mybatis.mapper.MemberMapper">
+
+
+	<resultMap type="Member" id="resultMapMember">
+		<result column="m_id" property="memberId" /><!--db쪽 column, dto 
+			: property(dto멤버변수), Member : dto type -->
+		<result column="m_pw" property="memberPw" />
+		<result column="m_level" property="memberLevel" />
+		<result column="m_name" property="memberName" />
+		<result column="m_email" property="memberEmail" />
+		<result column="m_addr" property="memberAddr" />
+		<result column="m_reg_date" property="memberRegDate" />
+		<!-- collection list에 하나하나씩 담아준다. property는 List 이름 javaType은 실제 동작 ofType 
+			= list에 담겨있는 것 public List<Goods> getGoodsList() { } -->
+		<collection property="goodsList"
+			javaType="java.util.ArrayList" ofType="Goods">
+			<id column="g_code" property="goodsCode" />
+			<result column="g_seller_id" property="goodsSellerId" />
+			<result column="g_name" property="goodsName"></result>
+			<result column="g_price" property="goodsPrice"></result>
+			<result column="g_reg_date" property="goodsRegDate"></result>
+		</collection>
+
+	</resultMap>
+
+	<select id="getSearchMemberList" parameterType="String" resultMap="resultMapMember">
+		<include refid="selectMemberColumn" />
+		FROM
+			tb_member
+		WHERE	
+			<if test="searchKey != null and searchKey neq ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+				
+			</if>
+	</select>
+<!--m_id LIKE CONCAT('%', 'id' , '%') => '%id'  -->
+
+
+	<select id="getSellerList" resultMap="resultMapMember">
+		SELECT
 		*
-	FROM
+		FROM
 		tb_member AS m
 		INNER JOIN
 		tb_goods AS g
 		on
 		m.m_id = g.g_seller_id;
-  </select>
-  
-  <sql id = "selectMemberColumn">
-  		SELECT
-		  m_id			
-		, m_pw			
-		, m_name			
-		, m_level		
-		, m_email		
-		, m_addr			
-		, m_reg_date	
-  </sql>
-  
-  
-  <!-- 회원리스트  -->
-  
-  <select id="getMemberList" resultMap="resultMapMember">
-   	<include refid="selectMemberColumn"/>
-	FROM
-		tb_member;	
-  </select>
-  <!-- 회원가입 -->
-  <insert id="addMember" parameterType="Member">
-  	INSERT INTO tb_member
-	(m_id, m_pw, m_name, m_level, m_email, m_addr, m_reg_date)
-	VALUES (
-	<!--  
-		#, $의 차이점!
-		
-		${memberId} = id001 > 값을 그대로 가져와 사용할 경우,
-		#{memberId} = 'id001'> 어떠한 특정한 경우 치환할 경우
-	-->
-		#{memberId}, 
-		#{memberPw}, 
-		#{memberName}, 
-		#{memberLevel}, 
-		#{memberEmail}, 
-		#{memberAddr}, 
-		NOW());
-  </insert>
-  
-  <!-- 업데이트  -->
-  <select id="getMemberById" parameterType="String" resultMap="resultMapMember">
-  		SELECT
-		  m_id			
-		, m_pw			
-		, m_name			
-		, m_level		
-		, m_email		
-		, m_addr			
-		, m_reg_date	
-	FROM
-		tb_member
-	WHERE 
-		m_id=#{memberId};	
-  </select>
-    <!--  업데이트쿼리 -->
-  <update id ="modifyMember" parameterType="Member">
-  		UPDATE tb_member
-  		<trim prefix="SET" suffixOverrides=",">
-  			<if test="memberPw != null and memberPw neq ''.toString()">
-  				m_pw = #{memberPw},
-  			</if>
-  			<if test="memberName != null and memberName neq ''.toString()">
-  				m_name = #{memberName},
-  			</if>
-  			<if test="memberLevel != null and memberLevel neq ''.toString()">
-  				m_level = #{memberLevel},
-  			</if>
-  			<if test="memberEmail != null and memberEmail neq ''.toString()">
-  				m_email = #{memberEmail},
-  			</if>
-  			<if test="memberAddr != null and memberAddr neq ''.toString()">
-  				m_addr = #{memberAddr},
-  			</if>
-  		</trim>
-		WHERE 
-			m_id = #{memberId};
-<!-- 	set
-		m_pw= #{memberPw},
-		m_name = #{memberName},
-		m_level = #{memberLevel},
-		m_email = #{memberEmail},
-		m_addr = #{memberAddr},
-		m_reg_date = now() -->
-  </update>
-  
-  <!-- 삭제처리 1 내가한거-->
-  <delete id="deleteMember" parameterType="String">
-  	DELETE 
-  	FROM 
-  		tb_member
-  	WHERE 
-  		m_id=#{memberId};
-  </delete>
-  
-  <!-- 삭제처리 2 removeDelete -->
-  <delete id="removeMember" parameterType="Member" >
-  	DELETE 
-  	FROM
-  		tb_login
-  	WHERE
-  		login_id = #{memberId}
-  		
-  	DELETE   	
-  	FROM
-  		tb_order
-  	WHERE
-  		o_id = #{memberId}
-  	
-  	DELETE   	
-  	FROM
-  		tb_goods
-  	WHERE
-  		g_seller_id = #{memberId}
-  		
-  	DELETE   	
-  	FROM 
-  		tb_member  	
-  	WHERE 
-  		m_id=#{memberId};
-  </delete>
-  <!-- 삭제처리 removeDelete -->
-   <delete id="removeLoginById" parameterType="String">
-  	DELETE 
-  	FROM
-  		tb_login
-  	WHERE
-  		login_id = #{memberId};	
-  </delete>
-   <delete id="removeOrderById" parameterType="String">
-  	DELETE 
-  	FROM
-  		tb_order
-  	WHERE
-  		o_id = #{memberId};	
-  </delete>
-   
-   <delete id="removeGoodsById" parameterType="String">
-  	DELETE 
-  	FROM
-  		tb_goods
-  	WHERE
-  		g_seller_id = #{memberId};	
-  </delete>
-     <delete id="removeMemberById" parameterType="String">
-  	DELETE 
-  	FROM
-  		tb_member
-  	WHERE
-  		m_id = #{memberId};	
-  </delete>
-  
+	</select>
 
-  
+
+
+	<!-- 회원리스트 -->
+
+	<!-- 조각나누어서 진행 -->
+	<sql id="selectMemberColumn">
+		SELECT
+		m_id
+		, m_pw
+		, m_name
+		, m_level
+		, m_email
+		, m_addr
+		, m_reg_date
+	</sql>
+
+	<select id="getMemberList" resultMap="resultMapMember">
+		<include refid="selectMemberColumn" />
+		FROM
+		tb_member;
+	</select>
+
+
+
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="Member">
+		INSERT INTO tb_member
+		(m_id, m_pw, m_name, m_level, m_email, m_addr, m_reg_date)
+		VALUES (
+		<!-- #, $의 차이점! ${memberId} = id001 > 값을 그대로 가져와 사용할 경우, #{memberId} = 
+			'id001'> 어떠한 특정한 경우 치환할 경우 -->
+		#{memberId},
+		#{memberPw},
+		#{memberName},
+		#{memberLevel},
+		#{memberEmail},
+		#{memberAddr},
+		NOW());
+	</insert>
+
+	<!-- 업데이트 -->
+	<select id="getMemberById" parameterType="String"
+		resultMap="resultMapMember">
+		SELECT
+		m_id
+		, m_pw
+		, m_name
+		, m_level
+		, m_email
+		, m_addr
+		, m_reg_date
+		FROM
+		tb_member
+		WHERE
+		m_id=#{memberId};
+	</select>
+	<!-- 업데이트쿼리 -->
+	<update id="modifyMember" parameterType="Member">
+		UPDATE tb_member
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="memberPw != null and memberPw neq ''.toString()">
+				m_pw = #{memberPw},
+			</if>
+			<if test="memberName != null and memberName neq ''.toString()">
+				m_name = #{memberName},
+			</if>
+			<if test="memberLevel != null and memberLevel neq ''.toString()">
+				m_level = #{memberLevel},
+			</if>
+			<if test="memberEmail != null and memberEmail neq ''.toString()">
+				m_email = #{memberEmail},
+			</if>
+			<if test="memberAddr != null and memberAddr neq ''.toString()">
+				m_addr = #{memberAddr},
+			</if>
+		</trim>
+		WHERE
+		m_id = #{memberId};
+		<!-- set m_pw= #{memberPw}, m_name = #{memberName}, m_level = #{memberLevel}, 
+			m_email = #{memberEmail}, m_addr = #{memberAddr}, m_reg_date = now() -->
+	</update>
+
+	<!-- 삭제처리 1 내가한거 -->
+	<delete id="deleteMember" parameterType="String">
+		DELETE
+		FROM
+		tb_member
+		WHERE
+		m_id=#{memberId};
+	</delete>
+
+	<!-- 삭제처리 2 removeDelete -->
+	<delete id="removeMember" parameterType="Member">
+		DELETE
+		FROM
+		tb_login
+		WHERE
+		login_id = #{memberId}
+
+		DELETE
+		FROM
+		tb_order
+		WHERE
+		o_id = #{memberId}
+
+		DELETE
+		FROM
+		tb_goods
+		WHERE
+		g_seller_id = #{memberId}
+
+		DELETE
+		FROM
+		tb_member
+		WHERE
+		m_id=#{memberId};
+	</delete>
+	<!-- 삭제처리 removeDelete -->
+	<delete id="removeLoginById" parameterType="String">
+		DELETE
+		FROM
+		tb_login
+		WHERE
+		login_id = #{memberId};
+	</delete>
+	<delete id="removeOrderById" parameterType="String">
+		DELETE
+		FROM
+		tb_order
+		WHERE
+		o_id = #{memberId};
+	</delete>
+
+	<delete id="removeGoodsById" parameterType="String">
+		DELETE
+		FROM
+		tb_goods
+		WHERE
+		g_seller_id = #{memberId};
+	</delete>
+	<delete id="removeMemberById" parameterType="String">
+		DELETE
+		FROM
+		tb_member
+		WHERE
+		m_id = #{memberId};
+	</delete>
+
+
+
 </mapper>

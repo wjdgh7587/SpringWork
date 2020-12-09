@@ -136,6 +136,12 @@ public class MemberService {
 		
 	}
 
+	public List<Member> getSearchMemberList(String searchKey, String searchValue) {
+		List<Member> memberSearchList = memberMapper.getSearchMemberList(searchKey , searchValue);
+				
+		return memberSearchList;
+	}
+
 
 		
 }
