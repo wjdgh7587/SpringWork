@@ -1,6 +1,7 @@
 package kr.or.ksmart37.ksmart.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,6 +10,15 @@ import kr.or.ksmart37.ksmart.mybatis.dto.Member;
 
 @Mapper
 public interface MemberMapper {
+	
+	//로그인 이력 마지막 구하기
+	public int getLoginHistroyCount();
+	
+	
+	//로그인 이력 맵으로 처리
+	public List<Map<String, Object>> getLoginHistory(int startRow, int rowPerPage);
+	
+	//검색 처리
 	public List<Member> getSearchMemberList(String searchKey, String searchValue);
 	List<Member> getSellerList();
 	List<Goods> goodsList();

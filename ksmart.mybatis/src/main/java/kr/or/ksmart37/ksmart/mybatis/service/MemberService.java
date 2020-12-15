@@ -1,6 +1,8 @@
 package kr.or.ksmart37.ksmart.mybatis.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -141,7 +143,55 @@ public class MemberService {
 				
 		return memberSearchList;
 	}
-
+	
+	public Map<String, Object> getLoginHistory(int currentPage){
+		
+		int startRow = 0;
+		int rowPerPage = 5;
+		int startPageNum = 1;
+		int endPageNum = 10;
+		
+		//마지막 페이지 구하기 (이를 작업하기 위해, mapper 쪽에서 필요한 쿼리 및 맵핑 작업 완료)
+		double count = memberMapper.getLoginHistroyCount();
+		
+		//로그인 카운트과 행당 페이지 표현 변수를 나누어, 강제로 올림을 처리한다.
+		int lastPage = (int)Math.ceil(count/rowPerPage);
+		
+		//페이지 알고리즘
+		startRow = (currentPage - 1) * rowPerPage;
+		
+		List<Map<String, Object>> loginHistory = memberMapper.getLoginHistory(startRow, rowPerPage);
+		
+		
+		//나중에 변수로 한꺼번에 처리하기
+		//Add func(variable)
+		
+		if(currentPage > 6) {
+			startPageNum = currentPage - 5;
+			
+			endPageNum = currentPage + 4;
+			
+			if(endPageNum >= lastPage) {
+				startPageNum = (lastPage - 9);
+				endPageNum = lastPage;
+			}
+		}
+		System.out.println("###########################");
+		System.out.println(startPageNum);
+		System.out.println(endPageNum);
+		
+		//Map 생성
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("loginHistory", loginHistory);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("endPageNum", endPageNum);
+		
+		
+		return resultMap;
+	}
+	
 
 		
 }

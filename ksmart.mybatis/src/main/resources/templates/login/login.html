@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">
-					<button type="submit">로그인</button>
+					<button class="ajaxTestBtn" type="submit">로그인</button>
 				</td>
 			</tr>	
 		</table>
@@ -47,6 +47,12 @@
 	var id = document.querySelector(".m_id");
 
 	var id_form = id.parentNode.parentElement;
+	
+	//ajaxTest varialbe ////////////////////////////////////////////////////
+	const ajaxTestBtn = document.querySelector(".ajaxTestBtn");
+	const ajaxLoginId = document.querySelector(".m_id");
+	const ajaxLoginPw = doucment.querySelector(".m_pw");
+	//////////////////////////////////////////////////////////////
 
 	console.log(id_form);
 	console.log(pw_form);
@@ -62,8 +68,21 @@
 		var btnTest = document.querySelector("#btntest").addEventListener("click", function checkingEmpty() {
 			console.log(id);
 		});
+		
+		var ajaxTest = doucment.querySelector(".ajaxTestBtn").addEventListener("click", function checkginAjax(){
+			
+		
+			
+		}){
+			
+		}
 	}
 
+	
+	
+	
+	
 	init();
+	
 
 </script>

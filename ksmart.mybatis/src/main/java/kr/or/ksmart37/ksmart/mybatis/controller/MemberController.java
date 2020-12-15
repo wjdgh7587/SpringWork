@@ -1,6 +1,7 @@
 package kr.or.ksmart37.ksmart.mybatis.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +36,46 @@ public class MemberController {
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
-
+	
+	/*
+	 * @RequestMapping(value = "/ajaxTest", method = ReqeustMethod.POST, produces = "application/json")
+	 * 
+	 * public @ResponseBody String ajaxText(@RequestParam Map<String, Object> map){
+	 * 	Member member = null;
+	 * 
+	 * List<Member> list = new ArrayList<Member>();
+	 * 
+	 * for(int i=0; i<9 i++){
+	 * 	member = new Member();
+	 *  member.setMemberId("id00"+(i+1));
+	 *  member.setMemberPw("pw00"+(i+1));
+	 *  list.add(member)
+	 * }
+	 * return list;
+	 * 
+	 * }
+	 * */
+	
+	@GetMapping("/loginHistory")
+	public String loginHsitroy(Model model
+			,@RequestParam (name = "currentPage", defaultValue = "1", required = false) int currentPage) {
+		
+		
+		model.addAttribute("title", "로그인 이력");	
+		
+		Map<String, Object> resultMap = memberService.getLoginHistory(currentPage);
+		
+		model.addAttribute("loginHistory", resultMap.get("loginHistory"));
+		model.addAttribute("lastPage", resultMap.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		
+		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+		
+		
+		return "login/loginHstory";
+		//return "redirect:/";
+	}
 	
 	@PostMapping("/memberList")
 	public String memberList(@RequestParam(name = "sk", required = false )String searchKey,

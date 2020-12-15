@@ -27,6 +27,26 @@
 		</collection>
 
 	</resultMap>
+	
+	<select id="getLoginHistroyCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			 tb_login;		
+	</select>
+	
+	<select id="getLoginHistory" parameterType="int" resultType="map">
+		SELECT
+			 login_num AS loginNum
+			 ,login_id AS loginId
+			 ,login_date AS loginDate
+			 ,logout_date AS logoutDate
+		FROM
+			 tb_login
+		LIMIT #{startRow}, #{rowPerPage};	
+			
+	</select>
+			 <!-- int startRow, int rowPerPage -->
 
 	<select id="getSearchMemberList" parameterType="String" resultMap="resultMapMember">
 		<include refid="selectMemberColumn" />
