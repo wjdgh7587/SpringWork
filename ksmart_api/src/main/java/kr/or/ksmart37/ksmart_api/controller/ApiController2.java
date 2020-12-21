@@ -70,8 +70,8 @@ public class ApiController2 {
 				
 				map.put("hour", hour);
 				map.put("wfKor", wfKor);
-				wList.add(map);
 				
+				wList.add(map);
 				System.out.println(hour + " -- "+wfKor);
 				
 			}

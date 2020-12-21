@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:title="title"></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Food APi 테스트</h1>
+    <input class="foodInput">
+    <button class="foodApiTest">TEST</button>
+    <table border="1">
+		<thead>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+			</tr>
+		</thead>
+		<tbody id="wData">
+			<tr>
+				<td colspan="2">확인 버튼을 눌러주세요.</td>
+			</tr>
+		</tbody>
+	</table>
+    <script>
+      const foodApiTestBtn = document.querySelector(".foodApiTest");
+
+      $(".foodApiTest").click(function () {
+        var html = "";
+        var food = $('.foodInput').val();
+        console.log(food)
+        var request = $.ajax({
+          url: "/foodApiResult",
+          method: "get",
+          data: {food : food},
+          dataType: "json",
+        });
+        request.done(function (data) {
+          console.log(data);
+          alert("success");
+        /*   for(var i=0; i<data.length; i++){
+				html += '<tr>';
+				html += '<td>';
+				html += data[i].hour;
+				html += '</td>';
+				html += '<td>';
+				html += data[i].wfKor;
+				html += '</td>';
+				html += '</tr>';
+			}
+			$('#wData').html(html); */
+        });
+        request.fail(function (jqXHR, textStatus) {
+          alert("Request failed: " + textStatus);
+        });
+      });
+
+      // function init() {
+      //   foodApiTestBtn.addEventListener("click", foodApi);
+      // }
+      //init();
+    </script>
+  </body>
+</html>
